@@ -3,24 +3,22 @@ from random import random
 from tarfile import NUL
 from types import resolve_bases
 import numpy as np
-from sklearn.metrics import mean_squared_error
 import math 
 from scipy import stats
 import os
 import time
 import pandas as pd
-from sklearn.preprocessing import scale
+from A001_fonctions import *
+'''
 
 
-def get_filename(path,filetype):  # 输入路径、文件类型例如'.csv'
-    name = []
-    for root,dirs,files in os.walk(path):
-        for i in files:
-            if os.path.splitext(i)[1]==filetype:
-                name.append(i)    
-    return name
 
+'''
 
+# ===================================================================
+#  
+# 
+# ===================================================================
 execel_patch = "ISTM_resultat/CityPulse/"
 file_Nmae = get_filename(execel_patch, '.xlsx')
 for i in range(len(file_Nmae)):
@@ -68,10 +66,10 @@ while(True):
         tousLesVoisinsDeTouslesPionts = 'ISTM_resultat/CityPulse/tousLesVoisinsDeTouslesPionts.npy'
     elif(dataSet == "A"):
         nomFile = ['ISTM_resultat/AEP/ISTM_OPM_E_repare_et_E_original_all_BackTime4_modelTestNon5.npy',
-        'ISTM_resultat/AEP/ISTM_OPM_E_repare_et_E_original_all_BackTime4_modelTestNon10.npy',
-        'ISTM_resultat/AEP/ISTM_OPM_E_repare_et_E_original_all_BackTime4_modelTestNon15.npy',
-        'ISTM_resultat/AEP/ISTM_OPM_E_repare_et_E_original_all_BackTime4_modelTestNon20.npy',
-        'ISTM_resultat/AEP/ISTM_OPM_E_repare_et_E_original_all_BackTime4_modelTestNon25.npy']
+                    'ISTM_resultat/AEP/ISTM_OPM_E_repare_et_E_original_all_BackTime4_modelTestNon10.npy',
+                    'ISTM_resultat/AEP/ISTM_OPM_E_repare_et_E_original_all_BackTime4_modelTestNon15.npy',
+                    'ISTM_resultat/AEP/ISTM_OPM_E_repare_et_E_original_all_BackTime4_modelTestNon20.npy',
+                    'ISTM_resultat/AEP/ISTM_OPM_E_repare_et_E_original_all_BackTime4_modelTestNon25.npy']
         tousLesVoisinsDeTouslesPionts = 'ISTM_resultat/AEP/tousLesVoisinsDeTouslesPionts_RH_TH.npy'
 
  
@@ -153,7 +151,7 @@ while(True):
 
     sheet = pd.read_excel(execel_patch + execel_name, sheet_name= 0,header =0, engine = 'openpyxl')    
     sheet.loc[indexOfResultat,'state'] = "Done"
-    sheet.loc[indexOfResultat,'RMSE'] = RMSE
+    # sheet.loc[indexOfResultat,'RMSE'] = RMSE
     sheet.loc[indexOfResultat,'lock'] = ''   
     sheet.loc[indexOfResultat,'Time'] = averageTime
     # print("-------averageTime------- ",averageTime)
